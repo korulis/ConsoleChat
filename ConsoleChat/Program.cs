@@ -37,7 +37,7 @@ namespace ConsoleChat
         private static void Listen(object listenPort)
         {
             var listener = new TcpListener(IPAddress.Any, (int)listenPort);
-            listener.Start();
+            listener.Start(); //degdgdsgf
 
             var client = listener.AcceptTcpClient();
 
