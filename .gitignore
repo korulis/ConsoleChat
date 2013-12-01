@@ -1,4 +1,5 @@
-
+packages/*
+!packages/repositories.config
 #ignore thumbnails created by windows
 Thumbs.db
 #Ignore files build by Visual Studio
