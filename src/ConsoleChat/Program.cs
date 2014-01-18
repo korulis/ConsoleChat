@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Chat.Common;
 
 namespace ConsoleChat
 {
@@ -18,36 +19,11 @@ namespace ConsoleChat
             var listenPort = int.Parse(args[0]);
             var sendPort = int.Parse(args[1]);
 
-            var listenerThread = new Thread(Listen);
-            listenerThread.IsBackground = true;
-            listenerThread.Start(listenPort);
+            var userChannel = new ConsoleUserInterfaceChannel();
+            var serverChannel = new TcpServerCommunicationChannel(listenPort, sendPort);
 
-            Console.ReadLine();
-            var client = new TcpClient("localhost", sendPort);
-
-            while (true)
-            {
-                var line = Console.ReadLine();
-                var lineBytes = Encoding.ASCII.GetBytes(line + "\r\n");
-
-                client.GetStream().Write(lineBytes, 0, lineBytes.Length);
-            }
-        }
-
-        private static void Listen(object listenPort)
-        {
-            var listener = new TcpListener(IPAddress.Any, (int)listenPort);
-            listener.Start();
-
-            var client = listener.AcceptTcpClient();
-
-            var reader = new StreamReader(client.GetStream());
-
-            while (true)
-            {
-                var message = reader.ReadLine();
-                Console.WriteLine(message);
-            }
+            var application = new ChatApplication(userChannel, serverChannel);
+            application.Start();
         }
     }
 }

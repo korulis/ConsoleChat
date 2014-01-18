@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleApplicationTests.cs" />
     <Compile Include="MineSweeperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,6 +53,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chat.Common\Chat.Common.csproj">
+      <Project>{a5c267bd-13ae-4d5b-b1a4-8320753c49e2}</Project>
+      <Name>Chat.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConsoleChat\ConsoleChat.csproj">
       <Project>{A0E03C20-E6D3-4115-B2C8-EF25F324887F}</Project>
       <Name>ConsoleChat</Name>
